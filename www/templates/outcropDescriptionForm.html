@@ -1,0 +1,58 @@
+<head>
+<body ng-controller="OutcropDescriptionFormCtrl">
+
+<ion-header-bar class="bar-positive">
+  <div class="buttons">
+    <button class="button button-icon icon ion-ios-minus-outline"
+            ng-click="data.showDelete = !data.showDelete; data.showReorder = false"></button>
+  </div>
+  <h1 class="title">Outcrop Description Form</h1>
+  <div class="buttons">
+    <button class="button button-icon icon ion-more">
+      </button>
+
+  </div>
+</ion-header-bar>
+
+<ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+</ion-list>
+<ion-content>
+  <div class="list">
+    <label ng-repeat="outcropOption in outcropOptions" class="item item-input item-select">
+      <div class="input-label">
+        {{outcropOption.name}}
+      </div>
+      <select ng-options="option as option.colour for option in outcropOption.options" ng-model="selectedOption">
+      </select>
+    </label>
+  </div>
+
+  <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+
+    <ion-item ng-repeat="item in items"
+              item="item"
+              href="#/item/{{item.id}}" class="item-remove-animate">
+      Item {{ item.id }}
+      <ion-delete-button class="ion-minus-circled"
+                         ng-click="onItemDelete(item)">
+      </ion-delete-button>
+      <ion-option-button class="button-assertive"
+                         ng-click="edit(item)">
+        Edit
+      </ion-option-button>
+      <ion-option-button class="button-calm"
+                         ng-click="share(item)">
+        Share
+      </ion-option-button>
+      <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)">
+      </ion-reorder-button>
+    </ion-item>
+
+  </ion-list>
+</ion-content>
+
+<ion-footer-bar class="bar-positive">
+   <button class="button icon ion-share pull-right">
+  </button>
+</ion-footer-bar>
+</body>
